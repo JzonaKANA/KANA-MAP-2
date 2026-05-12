@@ -2,6 +2,10 @@ const viewer = new Cesium.Viewer('map', {
   imageryProvider: Cesium.createWorldImagery({
     style: Cesium.IonWorldImageryStyle.AERIAL
   }),
+  terrainProvider: Cesium.createWorldTerrain({
+    requestWaterMask: true,
+    requestVertexNormals: true
+  }),
   baseLayerPicker: false,
   geocoder: false,
   timeline: false,
@@ -14,5 +18,5 @@ const viewer = new Cesium.Viewer('map', {
   selectionIndicator: false
 });
 
-// Make sure the canvas sizes correctly
+// Ensure proper sizing
 viewer.resize();
