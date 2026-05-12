@@ -5,29 +5,22 @@
   <title>KANA Spatial Intelligence</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Cesium (fastly jsDelivr edge) -->
+  <!-- Cesium -->
   <link rel="stylesheet"
-        href="https://fastly.jsdelivr.net/npm/cesium@1.124.0/Build/Cesium/Widgets/widgets.css?v=20260512c" />
-  <script src="https://fastly.jsdelivr.net/npm/cesium@1.124.0/Build/Cesium/Cesium.js?v=20260512c"></script>
+        href="https://fastly.jsdelivr.net/npm/cesium@1.124.0/Build/Cesium/Widgets/widgets.css?v=KANAv1" />
+  <script src="https://fastly.jsdelivr.net/npm/cesium@1.124.0/Build/Cesium/Cesium.js?v=KANAv1"></script>
 
-  <!-- Your CSS (cache-busted) -->
-  <link rel="stylesheet" href="./styles.css?v=20260512c" />
+  <!-- Your CSS -->
+  <link rel="stylesheet" href="./styles.css?v=KANAv1" />
 </head>
 
 <body>
-  <!-- Always-visible header so we know HTML loaded -->
   <header class="app-header">
     <div class="title">KANA Spatial Intelligence</div>
     <div class="subtitle">MOCK DEMO · No PHI · Admin approval required</div>
-    <div class="build">BUILD: 2026-05-12c</div>
+    <div class="build">BUILD: KANAv1</div>
   </header>
 
-  <!-- Always-visible boot text (so we know body rendered) -->
-  <div id="boot" class="boot">
-    Loading KANA map…
-  </div>
-
-  <!-- Scope buttons -->
   <div class="scope-controls">
     <button onclick="window.kanaFlyScope && window.kanaFlyScope('kodiak')">Kodiak</button>
     <button onclick="window.kanaFlyScope && window.kanaFlyScope('archipelago')">Archipelago</button>
@@ -35,64 +28,53 @@
     <button onclick="window.kanaFlyScope && window.kanaFlyScope('all')">All Network</button>
   </div>
 
-  <!-- Map container -->
   <div id="map"></div>
-
-  <!-- Info + Error overlays -->
   <div id="infoPanel" class="info-panel hidden"></div>
   <div id="errorOverlay" class="error-overlay hidden"></div>
 
   <script>
-    // If Cesium didn't load, show a visible error (no silent blank screens)
-    (function () {
-      const err = document.getElementById('errorOverlay');
-      function show(msg) {
-        err.textContent = msg;
-        err.classList.remove('hidden');
-      }
+    // Visible error overlay helper
+    const err = document.getElementById("errorOverlay");
+    function showError(msg) {
+      err.textContent = msg;
+      err.classList.remove("hidden");
+      console.error(msg);
+    }
 
-      if (!window.Cesium) {
-        show(
-          "Cesium failed to load.\n\n" +
-          "Likely causes:\n" +
-          "• Network blocks fastly.jsdelivr.net\n" +
-          "• CDN outage\n\n" +
-          "Fix: we can swap CDN domains if needed."
-        );
-      }
-    })();
+    // Verify Cesium loaded (otherwise nothing else matters)
+    if (!window.Cesium) {
+      showError(
+        "Cesium failed to load.\n\n" +
+        "This usually means your network blocked fastly.jsdelivr.net\n" +
+        "or the CDN is having issues.\n\n" +
+        "Next step: I can swap the Cesium CDN host."
+      );
+    }
   </script>
 
-  <!-- Your app (IMPORTANT: app.js is inside /js) -->
-  <script src="./js/app.js?v=20260512c"></script>
+  <!-- IMPORTANT: real script tag with closing tag, and correct path -->
+  <script
+    src="./js/app.js?v=KANAv1"
+    defer
+    onload="window.__KANA_APP_LOADED__=true"
+    onerror="document.getElementById('errorOverlay').textContent='Failed to load ./js/app.js (404 or blocked). Check that js/app.js exists in the repo and the filename is exactly app.js (case-sensitive).'; document.getElementById('errorOverlay').classList.remove('hidden');"
+  ></script>
 
   <script>
-    // If app.js didn't run, show a visible error
-    (function () {
-      const boot = document.getElementById('boot');
-      const err = document.getElementById('errorOverlay');
-      function show(msg) {
-        err.textContent = msg;
-        err.classList.remove('hidden');
+    // If app.js never executed, we will tell you clearly
+    setTimeout(() => {
+      if (!window.__KANA_APP_LOADED__) {
+        const msg =
+          "app.js did not execute.\n\n" +
+          "This is almost always ONE of these:\n" +
+          "1) index.html had malformed <script> tags (now fixed)\n" +
+          "2) js/app.js does not exist at that exact path\n" +
+          "3) filename case mismatch (App.js vs app.js)\n\n" +
+          "Open DevTools → Network tab and confirm ./js/app.js returns 200.";
+        document.getElementById("errorOverlay").textContent = msg;
+        document.getElementById("errorOverlay").classList.remove("hidden");
       }
-
-      // app.js should set window.kanaFlyScope if it loaded correctly
-      setTimeout(() => {
-        if (typeof window.kanaFlyScope !== 'function') {
-          show(
-            "app.js did not load or did not execute.\n\n" +
-            "Check:\n" +
-            "• File exists at: /js/app.js\n" +
-            "• Path is correct in index.html: ./js/app.js\n" +
-            "• No syntax errors in js/app.js\n\n" +
-            "Open DevTools → Console for the exact error."
-          );
-        } else {
-          boot.textContent = "Loaded ✓";
-          setTimeout(() => boot.remove(), 800);
-        }
-      }, 900);
-    })();
+    }, 1200);
   </script>
 </body>
 </html>
