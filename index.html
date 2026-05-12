@@ -5,16 +5,18 @@
   <title>KANA Spatial Intelligence</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Cesium (CDN) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cesium@1.124.0/Build/Cesium/Widgets/widgets.css">
-  <script src="https://cdn.jsdelivr.net/npm/cesium@1.124.0/Build/Cesium/Cesium.js"></script>
+  <!-- Cesium (use fastly jsDelivr edge) -->
+  <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/cesium@1.124.0/Build/Cesium/Widgets/widgets.css?v=20260512a">
+  <script src="https://fastly.jsdelivr.net/npm/cesium@1.124.0/Build/Cesium/Cesium.js?v=20260512a"></script>
 
-  <link rel="stylesheet" href="./styles.css">
+  <!-- Cache-bust your CSS -->
+  <link rel="stylesheet" href="./styles.css?v=20260512a" />
 </head>
 <body>
   <header class="app-header">
     <div class="title">KANA Spatial Intelligence</div>
-    <div class="subtitle">MOCK DEMO · No PHI · Admin approval required before publishing</div>
+    <div class="subtitle">MOCK DEMO · No PHI · Admin approval required</div>
+    <div class="build">BUILD: 2026-05-12a</div>
   </header>
 
   <div class="scope-controls">
@@ -25,13 +27,11 @@
   </div>
 
   <div id="map"></div>
-
   <div id="infoPanel" class="info-panel hidden"></div>
-
-  <!-- On-screen error overlay (so we never “black screen” silently again) -->
   <div id="errorOverlay" class="error-overlay hidden"></div>
 
-  <script src="./app.js"></script>
+  <!-- Cache-bust your JS -->
+  <script src="./app.js?v=20260512a"></script>
 </body>
 </html>
 ``
