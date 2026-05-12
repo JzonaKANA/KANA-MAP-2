@@ -1,35 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <title>KANA Spatial Intelligence</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Cesium -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/cesium@1.124.0/Build/Cesium/Widgets/widgets.css"
-    rel="stylesheet"
-  />
+  <!-- Cesium (CDN) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cesium@1.124.0/Build/Cesium/Widgets/widgets.css">
   <script src="https://cdn.jsdelivr.net/npm/cesium@1.124.0/Build/Cesium/Cesium.js"></script>
 
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-
   <header class="app-header">
-    <strong>KANA Spatial Intelligence</strong>
-    <span style="margin-left:12px; font-size:12px; opacity:.7">
-      Mock demo · No PHI
-    </span>
+    <div class="title">KANA Spatial Intelligence</div>
+    <div class="subtitle">MOCK DEMO · No PHI · Admin approval required before publishing</div>
   </header>
+
+  <div class="scope-controls">
+    <button onclick="window.kanaFlyScope('kodiak')">Kodiak</button>
+    <button onclick="window.kanaFlyScope('archipelago')">Archipelago</button>
+    <button onclick="window.kanaFlyScope('anchorage')">Anchorage</button>
+    <button onclick="window.kanaFlyScope('all')">All Network</button>
+  </div>
 
   <div id="map"></div>
 
-  <!-- DATA FIRST -->
-  <script src="data/kanaLocations.js"></script>
+  <div id="infoPanel" class="info-panel hidden"></div>
 
-  <!-- APP LAST -->
-  <script src="js/app.js"></script>
+  <!-- On-screen error overlay (so we never “black screen” silently again) -->
+  <div id="errorOverlay" class="error-overlay hidden"></div>
 
+  <script src="./app.js"></script>
 </body>
 </html>
+``
