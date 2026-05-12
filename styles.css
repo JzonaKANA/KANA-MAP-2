@@ -111,8 +111,18 @@ html, body {
   white-space: pre-wrap;
 }
 
-.build {
-  margin-left: auto;
-  font-size: 11px;
-  opacity: .55;
+.build { margin-left: auto; font-size: 11px; opacity: .55; }
+
+.boot {
+  position: fixed;
+  left: 16px;
+  top: 120px;
+  z-index: 30;
+  font-size: 13px;
+  opacity: .75;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.10);
+  backdrop-filter: blur(10px);
 }
