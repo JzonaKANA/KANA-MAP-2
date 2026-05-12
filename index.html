@@ -5,33 +5,32 @@
   <title>KANA Spatial Intelligence</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Cesium (use fastly jsDelivr edge) -->
-  <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/cesium@1.124.0/Build/Cesium/Widgets/widgets.css?v=20260512a">
-  <script src="https://fastly.jsdelivr.net/npm/cesium@1.124.0/Build/Cesium/Cesium.js?v=20260512a"></script>
+  <!-- Cesium (use fastly jsDelivr edge; helps when cdn.jsdelivr.net is flaky/blocked) -->
+  <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/cesium@1.124.0/Build/Cesium/Widgets/widgets.css?v=20260512b" />
+  <script src="https://fastly.jsdelivr.net/npm/cesium@1.124.0/Build/Cesium/Cesium.js?v=20260512b"></script>
 
-  <!-- Cache-bust your CSS -->
-  <link rel="stylesheet" href="./styles.css?v=20260512a" />
+  <!-- Your CSS -->
+  <link rel="stylesheet" href="./styles.css?v=20260512b" />
 </head>
 <body>
   <header class="app-header">
     <div class="title">KANA Spatial Intelligence</div>
     <div class="subtitle">MOCK DEMO · No PHI · Admin approval required</div>
-    <div class="build">BUILD: 2026-05-12a</div>
+    <div class="build">BUILD: 2026-05-12b</div>
   </header>
 
   <div class="scope-controls">
-    <button onclick="window.kanaFlyScope('kodiak')">Kodiak</button>
-    <button onclick="window.kanaFlyScope('archipelago')">Archipelago</button>
-    <button onclick="window.kanaFlyScope('anchorage')">Anchorage</button>
-    <button onclick="window.kanaFlyScope('all')">All Network</button>
+    <button onclick="window.kanaFlyScope && window.kanaFlyScope('kodiak')">Kodiak</button>
+    <button onclick="window.kanaFlyScope && window.kanaFlyScope('archipelago')">Archipelago</button>
+    <button onclick="window.kanaFlyScope && window.kanaFlyScope('anchorage')">Anchorage</button>
+    <button onclick="window.kanaFlyScope && window.kanaFlyScope('all')">All Network</button>
   </div>
 
   <div id="map"></div>
   <div id="infoPanel" class="info-panel hidden"></div>
   <div id="errorOverlay" class="error-overlay hidden"></div>
 
-  <!-- Cache-bust your JS -->
-  <script src="./app.js?v=20260512a"></script>
+  <!-- IMPORTANT: app.js is inside /js -->
+  <script src="./js/app.js?v=20260512b"></script>
 </body>
 </html>
-``
