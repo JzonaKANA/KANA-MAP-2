@@ -74,6 +74,10 @@ const viewer = new Cesium.Viewer("map", {
   selectionIndicator: false,
   shouldAnimate: true
 });
+// Improve perceived imagery sharpness
+viewer.scene.globe.maximumScreenSpaceError = 1.5;   // default is ~2
+viewer.scene.globe.tileCacheSize = 200;             // keep more tiles in memory
+viewer.scene.requestRenderMode = false;             // continuous render
 
 // Force globe visible and visible even if imagery fails
 viewer.scene.globe.show = true;
